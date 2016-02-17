@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>锦里商户移动支付划账分单系统 </title>
+<meta charset="UTF-8">
+<meta name="description"
+	content="The aplipay Settlement System for Jingli Inc">
+<meta name="author" content="SiChuan Abacus Cyberscope Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="base/bootstrap/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/bootstrap-theme.min.css" type="text/css"
+	rel="stylesheet">
+<!-- loading the client script -->
+<script type="text/javascript"
+	src="base/jquery/2.0.0/jquery-2.0.0.min.js"></script>
+<script type="text/javascript"
+	src="base/bootstrap/js/bootstrap.min.js"></script>
+	<script src="base/jquery-validate/jquery.validate.js"></script>
+<script type="text/javascript" src="base/jshash/md5.js"></script>
+<style type="text/css">
+  body {
+  padding-top: 55px;
+}
+</style>
+</head>
+<body>
+	<!-- Top Navigation bar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+				 <a class="navbar-brand" href="#">锦里商户移动支付划账分单系统</a>
+			   </div>
+				  <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">首页</a></li>                   
+          </ul>         
+        </div><!--/.nav-collapse -->	
+			</div>
+	</nav>
+	
+	
+	 <div class="jumbotron">
+      <div class="container">
+        <h1>移动支付清分系统</h1>
+     
+      </div>
+    </div>
+
+	
+	<div class="container">		
+		<!-- fluid rows -->
+		<div class="row">			
+			<div class="col-md-4">
+				<h2>商户资料注册</h2>
+				<p>在这里注册商户基本信息和pos机，合约信息。</p>
+				<p>
+					<a class="btn btn-primary" href="merchant-list.html">登入 &raquo;</a>
+				</p>
+			</div>
+				<div class="col-md-4">
+				<h2>清分查询</h2>
+				<p>这里可以查询每笔交易的清分和汇总信息。</p>
+				<p>
+					<a class="btn btn-primary" href="merchantstmt-transfer.html">登入 &raquo;</a>
+				</p>
+			</div>
+		</div>
+		<hr>
+		<footer>
+			<p style="font-family: Arail">&copy; SiChuan Abacus System Inc
+				2013-2015.</p>
+		</footer>
+	</div>
+	 	
+	<script type="text/javascript">
+       $.ajax({
+			url:'/sei/auth/api/islogin',
+			type:'GET',		
+			success:function(msg){	
+				var op=eval(msg);
+				if(op.status=='0'){					
+					location.href="login.html";
+				}					
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				   alert("出错了，请重试，或本次登陆已失效，需重新登陆！");	
+			}
+		});
+ 	   
+	</script>
+</body>
+</html>

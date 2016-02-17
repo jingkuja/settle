@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>锦里商户移动支付划账分单系统 - 商户登录账户</title>
+<meta charset="UTF-8">
+<meta name="description"
+	content="The aplipay Settlement System for Jingli Inc">
+<meta name="author" content="SiChuan Abacus Cyberscope Team">
+<meta name="author" content="SiChuan Abacus Cyberscope Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- loading the bootstrap -->
+<link href="base/bootstrap/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/bootstrap-responsive.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/bootstrap-theme.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/daterangepicker.css" type="text/css"
+	rel="stylesheet">
+<!-- loading the client script -->
+<script type="text/javascript"
+	src="base/jquery/2.0.0/jquery-2.0.0.min.js"></script>
+<script type="text/javascript"  src="base/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="base/bootstrap/js/moment.js"></script>
+<script type="text/javascript" src="base/bootstrap/js/daterangepicker.js"></script>
+<script type="text/javascript" src="base/jshash/md5.js"></script>
+<script src="base/jquery-validate/jquery.validate.js"></script>
+<script type="text/javascript" src="merchant/account.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){$("#t-addDeviceModal").on("click",function(event){event.preventDefault();
+$("#addDeviceModal").modal();});});
+</script>
+<style type="text/css">
+ .black_overlay{
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index:1001;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=50);
+        }
+        .white_content {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 50%;
+            height: 50%;
+            padding: 16px;
+            border: 16px solid orange;
+            background-color: white;
+            z-index:1002;
+            overflow: auto;
+        }
+		 body {
+         padding-top: 55px;
+      }
+</style>
+</head>
+<body>
+       <div id="light" class="white_content">
+                                                     正在处理，请稍后...............
+        </div>
+        <div id="fade" class="black_overlay"></div>
+	<!-- Top Navigation bar -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+				 <a class="navbar-brand" href="index.html">锦里商户移动支付划账分单系统</a>
+		 </div>
+		 <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="merchant-list.html">商户登记</a></li>                   
+          </ul>         
+          </div><!--/.nav-collapse -->	
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<div class="well">
+           <p id='mname'></p>			
+		   <p class="text-info">商户账号管理。</p>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1">
+				<a id="t-addDeviceModel" role="button" data-toggle="modal" href="#addDeviceModal" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>添加账号</a>
+				&nbsp;<a href="javascript:tosete();" class="btn btn-default">返回</a>
+			</div>
+		</div>
+		<hr>
+	   <div id="listcontent">				
+		</div>
+		</div>
+		<hr>
+		<div class="col-md-9 col-md-offset-1">					
+		<footer>
+			<p style="font-family: Arail">&copy; SiChuan Abacus System Inc
+				2013-2015.</p>
+		</footer>
+		</div>
+	<!-- The adding device dialog -->
+	<div id="addDeviceModal" class="modal fade" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+        <div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h3 id="myModalLabel">新建登录账号</h3>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal" id='form'>
+			<input id="mid" name="mid" type="hidden">
+			<input id="cid" name="cid" type="hidden">	
+			<input id="aliasid" name="aliasid" type="hidden">	
+			<input id="aliasname" name="aliasname" type="hidden">	
+			<input id="auth" name="auth"  value='2' type="hidden">	
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="account">登录账号</label>
+					<div class="col-sm-5">
+						<input id="account" name="account" type="text"
+							placeholder="" class="form-control">
+					</div>
+				</div>			
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true" id="mt" >放弃</button>
+			<button class="btn btn-primary" id="submit">创建</button>
+		</div>
+		 </div>
+       </div>
+	</div>
+</body>
+<script type="text/javascript">
+		Account.init();
+</script>
+</html>

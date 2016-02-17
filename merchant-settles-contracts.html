@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>锦里商户移动支付划账分单系统 - 商户结算协议</title>
+<meta charset="UTF-8">
+<meta name="description"
+	content="The aplipay Settlement System for Jingli Inc">
+<meta name="author" content="SiChuan Abacus Cyberscope Team">
+<meta name="author" content="SiChuan Abacus Cyberscope Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+ .black_overlay{
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index:1001;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=50);
+        }
+        .white_content {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 50%;
+            height: 50%;
+            padding: 16px;
+            border: 16px solid orange;
+            background-color: white;
+            z-index:1002;
+            overflow: auto;
+        }
+	  body {
+         padding-top: 55px;
+      }
+    table.table-collapsiable tbody>tr:nth-child(2n+1)>td {
+	cursor: pointer;
+    }
+</style>
+<!-- loading the bootstrap -->
+<link href="base/bootstrap/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/bootstrap-responsive.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/bootstrap-theme.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/daterangepicker.css" type="text/css"
+	rel="stylesheet">
+<!-- loading the client script -->
+<script type="text/javascript"
+	src="base/jquery/2.0.0/jquery-2.0.0.min.js"></script>
+<script type="text/javascript"  src="base/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="base/bootstrap/js/moment.js"></script>
+<script type="text/javascript" src="base/bootstrap/js/daterangepicker.js"></script>
+<script type="text/javascript" src="base/jshash/md5.js"></script>
+<script src="base/jquery-validate/jquery.validate.js"></script>
+<script type="text/javascript" src="merchant/settles.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("table.table-collapsiable tbody > tr:nth-child(2n) > td")
+						.hide();
+				$("table.table-collapsiable tbody > tr:nth-child(2n+1) > td")
+						.on(
+								"click",
+								function(event) {
+									$(this).parent("tr").next().children("td")
+											.fadeToggle();
+								});
+				$("#t-addContractModal").on("click",function(event){
+					event.preventDefault();
+					$("#addContractModal").modal();
+				});							
+			});
+</script>
+</head>
+<body>
+      <div id="light" class="white_content">
+                                                     正在处理，请稍后...............
+      </div>
+      <div id="fade" class="black_overlay"></div>
+	<!-- Top Navigation bar -->
+	 <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+				 <a class="navbar-brand" href="index.html">锦里商户移动支付划账分单系统</a>
+		 </div>
+		 <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="merchant-list.html">商户登记</a></li>                   
+          </ul>         
+          </div><!--/.nav-collapse -->	
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<div class="well">
+			<p id='mname'>
+			</p>
+			<p class="text-info">对特约商户的刷卡手续费的登记、变更等处理。</p>
+			<p class="text-success">点击展开商户条目完成更多业务处理。</p>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1">
+				<a id="t-addContractModal" href="＃addContractModal" role="button" data-toggle="modal"
+					class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>添加协议</a>
+				<a href="merchant-list.html" class="btn btn-default">返回</a>
+			</div>
+		</div>
+		<hr>
+		<div id='listcontent'>	
+		</div>
+		</div>
+		<hr>
+		<div class="col-md-9 col-md-offset-1">					
+		<footer>
+			<p style="font-family: Arail">&copy; SiChuan Abacus System Inc
+				2013-2015.</p>
+		</footer>
+	</div>
+	<!-- The adding contract dialog -->
+	<div id="addContractModal" class="modal fade" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog" role="document">
+        <div class="modal-content">
+		 <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-label="Close">×</button>
+			<h3 id="myModalLabel">新建结算协议</h3>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal"  id='form'>
+			 <input type="hidden" id="mid" name="mid" />		
+				<input type="hidden" id="stime" name="stime" />
+				<input type="hidden" id="etime" name="etime" />			
+				<input id="paysrvAN" name="paysrvAN"  value="2088711523501971" type="hidden">
+				<input id="paysrvKey" name="paysrvKey"  value="gv585s4opu9hfbv804pjuxreqauzuohq"  type="hidden">
+				<input id="paysrvAltAN" name="paysrvAltAN" type="hidden"  value="2593772529@qq.com">
+				<input id="paysrvAgent" name="paysrvAgent" type="hidden" value="11524660a1">
+				<input id="deliveryURL" name="deliveryURL" type="hidden"
+							value="https://115.29.163.102/sei/settle/api">
+					<input id="deliveryKey" name="deliveryKey" type="hidden"
+							value="ZyZeYZd5q7k=">
+				 <fieldset>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="reservation">协议期间</label>
+                    <div class="input-group date col-sm-5" >
+                       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					   <input type="text" name="reservation" id="reservation" value="" readonly  class="form-control"/>				   
+                    </div>
+                  </div>
+                </fieldset>	 
+                	<div class="form-group">
+					<label class="col-sm-3 control-label" for="xytype">协议类型</label>
+					<div class="col-sm-5">					
+						<select id='xytype' name='xytype' class="form-control">
+							<option value ="22" >成员商户协议</option>					 
+						   	<option value ="21" >独立商户协议</option>	
+						</select>
+					</div>
+				</div>	 
+                	<div class="form-group">
+					<label class="col-sm-3 control-label" for="title">收单项目名称</label>
+					<div class="col-sm-5">					
+							<input id="title" name="title" type="text"
+							placeholder="" class="form-control">
+					</div>
+				</div>				
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="paysrvCode">第三方支付</label>
+					<div class="col-sm-5">					
+						<select id='paysrvCode' name='paysrvCode' class="form-control">
+						   	 <option value ="101" >支付宝扫码付</option>					 	
+					     </select>
+					</div>
+				</div>												 		
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="rebate">商户费率</label>
+					<div class="input-group col-sm-5">
+						<!--<div class="input-append"> -->
+							<input id="rebate" name="rebate" type="text" class="form-control">
+							<span class="input-group-addon">%</span>
+						<!-- </div> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="rebate">第三方费率</label>
+					<div class="input-group col-sm-5">
+						<!--<div class="input-append"> -->
+							<input id="rebatea" name="rebatea" type="text" class="form-control">
+							<span class="input-group-addon">%</span>
+						<!-- </div> -->
+					</div>
+				</div>							   	
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true"  id="mt">放弃</button>
+			<button class="btn btn-primary" id="submit">创建协议</button>
+		</div>
+		</div>
+		</div>
+	</div>
+	
+	
+	
+	
+
+          
+      <script type="text/javascript">
+      
+      var d=new Date(); 
+      d.setDate(d.getDate()+365); 
+                 
+             var op=    $('#reservation').daterangepicker({
+                	  format: 'YYYY-MM-DD',   
+                	  startDate: new Date(),
+                      endDate: d,        
+                      locale: {
+                          applyLabel: '确定',
+                          fromLabel: '开始',
+                          clearLabel:'清除',
+                          toLabel: '结束',
+                          customRangeLabel: 'Custom Range',
+                          daysOfWeek: ['日', '一', '二', '三', '四', '五','六'],
+                          monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                          firstDay: 1
+                      },                                           
+                      inputMask: true
+                      },
+                  function(start, end) {
+                      document.getElementById('stime').value=start.format('YYYY-MM-DD');   
+                      document.getElementById('etime').value=end.format('YYYY-MM-DD');   
+                   }
+                  );                         
+             
+             var s=new Date()           
+             var m=d.getMonth()+1; 
+             var end= d.getFullYear()+'-'+m+'-'+d.getDate()            
+            var sm=s.getMonth()+1; 
+             var start= s.getFullYear()+'-'+sm+'-'+s.getDate()
+             
+             document.getElementById('reservation').value=start+"-"+end;
+                 document.getElementById('stime').value=start;   
+                 document.getElementById('etime').value=end;   
+                  Settles.init();           
+     </script>    
+	
+</body>
+</html>

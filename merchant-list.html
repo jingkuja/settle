@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>锦里商户移动支付划账分单系统  - 商户登记 - 列表</title>
+<meta charset="UTF-8">
+<meta name="description"
+	content="The aplipay Settlement System for Jingli Inc">
+<meta name="author" content="SiChuan Abacus Cyberscope Team">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="base/bootstrap/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/bootstrap-responsive.min.css" type="text/css"
+	rel="stylesheet">
+<link href="base/bootstrap/css/bootstrap-theme.min.css" type="text/css"
+	rel="stylesheet">
+<!-- loading the client script -->
+<script type="text/javascript"
+	src="base/jquery/2.0.0/jquery-2.0.0.min.js"></script>
+<script type="text/javascript"
+	src="base/bootstrap/js/bootstrap.min.js"></script>
+	<script src="base/jquery-validate/jquery.validate.js"></script>
+<script type="text/javascript" src="base/jshash/md5.js"></script>
+<script type="text/javascript"
+	src="base/jquery/2.0.0/ajaxfileupload.js"></script>
+<script type="text/javascript">
+  $.ajax({
+			url:'/sei/auth/api/islogin',
+			type:'GET',		
+			success:function(msg){	
+				var op=eval(msg);
+				if(op.status=='0'){		
+					location.href="login.html";
+				}					
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				   alert("出错了，请重试，或本次登陆已失效，需重新登陆！");	
+			}
+		});
+
+$(document).ready(function(){$("table.table-collapsiable tbody > tr:nth-child(2n) > td").hide();$("table.table-collapsiable tbody > tr:nth-child(2n+1) > td").on("click",function(event){
+		$(this).parent("tr").next().children("td").fadeToggle();
+	});
+});
+
+function hidediv(){
+	top.window.document.getElementById('light').style.display='none';
+	top.window.document.getElementById('fade').style.display='none';
+	}
+function showdiv(){
+	top.window.document.getElementById('light').style.display='block';
+	top.window.document.getElementById('fade').style.display='block';
+}
+
+	function ajaxFileUpload()
+	{	
+		showdiv();
+		$.ajaxFileUpload
+		(
+			{
+				url:'/sei/transfer/register/importmerchant',
+				secureuri:false,
+				fileElementId:'fileToUpload',
+				success: function (data, status)
+				{ 	
+					hidediv();						   
+				},
+				error: function (data, status, e)			
+				{
+     				alert("出错了，本次操作已失效，或登录失效需重新登陆系统！");	
+				    hidediv();						
+				}
+			}
+		)	
+		return false;
+	}
+	function ajaxFileUploadd()
+	{	
+		showdiv();
+		$.ajaxFileUpload
+		(
+			{
+				url:'/sei/transfer/register/importset',
+				secureuri:false,
+				fileElementId:'fileToUpload',
+				success: function (data, status)
+				{ 	
+					hidediv();						   
+				},
+				error: function (data, status, e)			
+				{
+     				alert("出错了，本次操作已失效，或登录失效需重新登陆系统！");	
+				    hidediv();						
+				}
+			}
+		)	
+		return false;
+	}
+
+    function ajaxFileUploadw()
+	{	
+		showdiv();
+		$.ajaxFileUpload
+		(
+			{
+				url:'/sei/transfer/register/importwxset',
+				secureuri:false,
+				fileElementId:'fileToUpload',
+				success: function (data, status)
+				{ 	
+					hidediv();						   
+				},
+				error: function (data, status, e)			
+				{
+     				alert("出错了，本次操作已失效，或登录失效需重新登陆系统！");	
+				    hidediv();						
+				}
+			}
+		)	
+		return false;
+	}
+
+	</script>
+<script type="text/javascript" src="merchant/merchantlist.js"></script>
+<style type="text/css">
+table.table-collapsiable tbody > tr:nth-child(2n+1) > td{cursor:pointer;}
+</style>
+<style type="text/css">
+  body {
+  padding-top: 55px;
+}
+
+ .black_overlay{
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index:1001;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=50);
+        }
+        .white_content {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 50%;
+            height: 50%;
+            padding: 16px;
+            border: 16px solid orange;
+            background-color: white;
+            z-index:1002;
+            overflow: auto;
+        }
+</style>
+</head>
+<body>
+      <div id="light" class="white_content">
+                                                     正在处理，请稍后...............
+      </div>
+      <div id="fade" class="black_overlay"></div>
+     
+	<!-- Top Navigation bar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+				 <a class="navbar-brand" href="index.html">锦里商户移动支付划账分单系统</a>
+		 </div>
+		 <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">商户登记</a></li>                   
+          </ul>         
+          </div><!--/.nav-collapse -->	
+		</div>
+	</nav>
+	
+
+
+
+	<div class="container-fluid">
+		<div class="well">
+			<p class="text-info">你可以在这儿轻松、方便地完成对商户信息，商户刷卡POS和结算合约的登记、变更等操作。</p>
+			<p class="text-success">点击展开商户条目完成更多业务处理。</p>
+		</div>
+	 <form  class="form-group">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-1">
+					<div class="btn-group btn-group-sm">
+						<a href="#" class="btn btn-default" onclick="searchlist(0,0)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a> <input
+							type="text" class="input-sm" placeholder="搜索商户" id="scontent">
+					</div>				
+			</div>		
+			<div class="col-md-2">
+				<a href="merchant-details.html" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新商户登记</a>
+			</div>		
+		</div>	
+		 <br/>
+        <div class="row">
+			<div class="col-md-4 col-md-offset-1">					
+								<input id="fileToUpload" type="file" name="fileToUpload" >						
+			</div>			
+			<div class="col-md-5">
+				<div class="btn-group">
+								<button class="btn btn-default" id="buttonUpload" onclick="return ajaxFileUpload();">上载</button>	
+								<!--<button class="btn btn-default" id="buttonUpload1" onclick="return ajaxFileUploadd();">上载建行费率</button>-->
+								<button class="btn btn-default" id="buttonUpload2" onclick="return ajaxFileUploadw();">上载支付协议</button>
+				</div>
+			</div>		
+		</div>
+	 </form>
+	   <hr>
+	  <div id="listcontent">				
+	  </div>	
+	</div>
+	 <hr>
+	<div class="col-md-9 col-md-offset-1">					
+	   <footer>
+			<p style="font-family: Arail">&copy; SiChuan
+				Abacus System Inc 2013-2015.</p>
+		</footer>
+	</div>
+</body>
+<script type="text/javascript">
+		Merchantlist.init();
+</script>
+
+</html>
